@@ -26,3 +26,7 @@ def create_dir(directory):
     for i in get_names(directory):
         i = i.split('_')[0]
         print(i)
+
+
+def give_name():
+    pass

@@ -48,8 +48,6 @@ def similarity_percentage(voice1, voice2):
     return {"result": similarity_percentage, "voice1_mfcc": list(voice1), "voice2_mfcc": list(voice2)}
 #    return similarity_percentage
 
-a = r"G:\Projects\Voice_Authentication\Voice_Authentication\data\data\process\audio1.wav"
-b = r"G:\Projects\Voice_Authentication\Voice_Authentication\data\data\process\audio2.wav"
 
 
 def get_amplitude(audio_path):

@@ -26,6 +26,3 @@ def preprocess_audio(input_audio, output_dir, target_dBFS=-20.0):
     return process_audio_name
 
 
-print(preprocess_audio(r"G:\Projects\Voice_Authentication\Voice_Authentication\data\audio_data\Akshay\Akshay_angry.ogg", process_audio_dir))
-
-

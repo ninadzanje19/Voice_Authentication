@@ -21,7 +21,7 @@
             const form = document.getElementById('audioForm');
             const formData = new FormData(form);
 
-            const url = "http://127.0.0.1:8000/metadata";
+            const url = "http://127.0.0.1:8001/upload_audio";
 
             try {
                 const response = await fetch(url, {
