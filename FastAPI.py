@@ -1,10 +1,24 @@
 from fastapi import FastAPI
 import uvicorn
 from pydantic import BaseModel
+from fastapi import FastAPI, File, Form, UploadFile
+from fastapi.responses import JSONResponse
+import os
+from fastapi.middleware.cors import CORSMiddleware
+from audio_preprocessing import preprocess_audio
 from feature_extraction import *
 from fastapi.responses import HTMLResponse
 
+UPLOAD_DIRECTORY = r"G:\Projects\Voice_Authentication\Voice_Authentication\data\audio_data"
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 class audios(BaseModel):
     audio1: str
@@ -21,9 +35,23 @@ async def home():
     return result
 
 @app.post("/metadata")
-async def metadata(params: metadata):
-    audio_data = extract_mfcc(params.audio)
-    return audio, audio_data
+async def metadata(
+    name: str = Form(...),
+    audio: UploadFile = File(...)
+):
+    # Save the uploaded file
+    file_location = f"{UPLOAD_DIRECTORY}/{audio.filename}"
+    with open(file_location, "wb") as file_object:
+        file_object.write(await audio.read())
+
+    processed_audio = preprocess_audio(file_location, process_audio_dir)
+    audio_mfcc = extract_mfcc(processed_audio)
+    audio_mfcc = list(audio_mfcc)
+    return {
+        "metadata": name,
+        "mfcc_data": audio_mfcc,
+        "location": processed_audio
+    }
 @app.post("/")
 async def home2(params: audios):
     voice1 = fr"G:\Projects\Voice_Authentication\Voice_Authentication\data\process_audio\{params.audio1}.wav"

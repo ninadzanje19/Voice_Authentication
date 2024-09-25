@@ -92,6 +92,7 @@ def normalize_audio(input_path, output_path, target_dBFS=-20.0):
     normalized_audio.export(output_path, format="wav")
 
 
+
 # Example usage
 #arr1 = r"G:\Projects\Voice_Authentication\Voice_Authentication\data\data\process\audio2.wav"
 #arr2 = r"G:\Projects\Voice_Authentication\Voice_Authentication\data\data\process\audio3.wav"
